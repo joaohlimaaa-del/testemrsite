@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E1251B">
+  <title>Contato e Equipe | MR Imobiliária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .contato-page { padding: 56px 0 80px; }
+    .contato-head { text-align: center; margin-bottom: 48px; }
+    .contato-head .sub { color: var(--mr-red); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+    .contato-head h1 { font-size: 42px; font-weight: 800; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 8px; }
+    .contato-head p { font-size: 16px; color: var(--gray-600); max-width: 580px; margin: 0 auto; }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 32px;
+      margin-bottom: 60px;
+    }
+    .contato-info {
+      background: var(--gray-50);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+    .contato-info h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 18px; }
+    .contato-item {
+      display: flex; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .contato-item:last-of-type { border-bottom: none; }
+    .contato-item .icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--mr-red-soft);
+      color: var(--mr-red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .contato-item .info { flex: 1; min-width: 0; }
+    .contato-item .label { font-size: 11px; font-weight: 700; color: var(--gray-600); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
+    .contato-item .value { font-size: 15px; font-weight: 600; color: var(--gray-950); }
+    .contato-item a.value:hover { color: var(--mr-red); }
+
+    .contato-form-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+    .contato-form-card h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 18px; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .form-group-c { display: flex; flex-direction: column; gap: 6px; }
+    .form-group-c label { font-size: 12px; font-weight: 600; color: var(--gray-700); }
+    .form-group-c .req { color: var(--mr-red); }
+    .form-input-c {
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      background: white;
+      color: var(--gray-950);
+      transition: all .2s;
+      font-family: inherit;
+      width: 100%;
+    }
+    .form-input-c:focus { outline: none; border-color: var(--mr-red); box-shadow: 0 0 0 3px rgba(225,37,27,0.12); }
+    textarea.form-input-c { min-height: 120px; resize: vertical; }
+    .form-row-full { margin-bottom: 14px; }
+    .form-row-full .form-group-c { display: flex; }
+
+    .team-section { padding: 60px 0 0; }
+    .team-section h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.025em; text-align: center; margin-bottom: 8px; }
+    .team-section .sub-team { text-align: center; font-size: 15px; color: var(--gray-600); margin-bottom: 36px; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .team-card {
+      text-align: center;
+      padding: 22px 18px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      transition: all .2s;
+    }
+    .team-card:hover { border-color: var(--mr-red); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .team-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mr-red), #b81b13);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 28px;
+      margin: 0 auto 14px;
+    }
+    .team-name { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 3px; }
+    .team-role { font-size: 12px; color: var(--gray-600); margin-bottom: 12px; }
+    .team-creci { font-size: 10px; font-weight: 700; color: var(--mr-red); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 12px; }
+    .team-whatsapp {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      background: #25D366; color: white;
+      border-radius: 100px;
+      font-size: 12px; font-weight: 600;
+      transition: all .2s;
+    }
+    .team-whatsapp:hover { background: #1faa55; }
+
+    .map-section { padding: 80px 0; background: var(--gray-50); }
+    .map-section h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; text-align: center; margin-bottom: 8px; }
+    .map-section p { text-align: center; color: var(--gray-600); margin-bottom: 32px; font-size: 14px; }
+    .map-box {
+      aspect-ratio: 21/9;
+      background: linear-gradient(135deg, var(--gray-200), var(--gray-100));
+      border-radius: var(--radius-lg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--gray-500);
+      font-size: 14px;
+      gap: 8px;
+    }
+    .map-box svg { width: 48px; height: 48px; }
+
+    @media (max-width: 1024px) {
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .contato-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .contato-head h1 { font-size: 28px; }
+      .contato-info, .contato-form-card { padding: 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-input-c { font-size: 16px; padding: 13px 14px; }
+      .team-section h2 { font-size: 24px; }
+      .team-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .team-card { padding: 18px 14px; }
+      .team-avatar { width: 72px; height: 72px; font-size: 22px; }
+      .team-name { font-size: 14px; }
+      .map-box { aspect-ratio: 4/3; }
+    }
+    @media (max-width: 480px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">🎨 <strong>PRÉVIA DE DESIGN</strong> · Versão preliminar</div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+      <nav id="primary-nav">
+        <ul>
+          <li><a href="comprar.html">Comprar</a></li>
+          <li><a href="alugar.html">Alugar</a></li>
+          <li><a href="lancamentos.html">Lançamentos</a></li>
+          <li><a href="administracao.html">Administração</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="contato.html" class="nav-active">Contato</a></li>
+          <li class="mobile-only"><a href="equipe.html">🔒 Área da Equipe</a></li>
+          <li class="mobile-cta"><a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="equipe.html" class="btn btn-ghost btn-team">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Área da Equipe</span>
+        </a>
+        <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Fale Conosco</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <section class="contato-page">
+    <div class="container">
+      <div class="contato-head">
+        <div class="sub">Fale com a MR</div>
+        <h1>Estamos aqui para te ajudar</h1>
+        <p>Atendemos de segunda a sexta das 8h às 18h e sábado das 9h às 13h. Resposta em até 30 minutos no horário comercial.</p>
+      </div>
+
+      <div class="contato-grid">
+        <div class="contato-info">
+          <h3>Canais de atendimento</h3>
+
+          <div class="contato-item">
+            <div class="icon">📞</div>
+            <div class="info">
+              <div class="label">Telefone</div>
+              <a class="value" href="tel:+559831312800">(98) 3131-2800</a>
+            </div>
+          </div>
+
+          <div class="contato-item">
+            <div class="icon">📱</div>
+            <div class="info">
+              <div class="label">WhatsApp</div>
+              <a class="value" href="https://wa.me/5598981160785" target="_blank" rel="noopener">(98) 98116-0785</a>
+            </div>
+          </div>
+
+          <div class="contato-item">
+            <div class="icon">✉</div>
+            <div class="info">
+              <div class="label">E-mail</div>
+              <a class="value" href="mailto:contato@mrimobiliaria.com.br">contato@mrimobiliaria.com.br</a>
+            </div>
+          </div>
+
+          <div class="contato-item">
+            <div class="icon">📍</div>
+            <div class="info">
+              <div class="label">Endereço</div>
+              <div class="value">Sede MR Imobiliária<br><span style="font-weight:400;color:var(--gray-600);font-size:13px;">São Luís, Maranhão</span></div>
+            </div>
+          </div>
+
+          <div class="contato-item">
+            <div class="icon">🕐</div>
+            <div class="info">
+              <div class="label">Horário de atendimento</div>
+              <div class="value" style="font-size:14px;">
+                Seg-Sex: 8h às 18h<br>
+                <span style="font-weight:400;color:var(--gray-600);">Sáb: 9h às 13h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contato-form-card">
+          <h3>Envie uma mensagem</h3>
+          <form id="contatoForm" onsubmit="return submitContato(event)">
+            <div class="form-row">
+              <div class="form-group-c">
+                <label>Nome <span class="req">*</span></label>
+                <input class="form-input-c" type="text" id="cNome" placeholder="Como podemos te chamar?" required>
+              </div>
+              <div class="form-group-c">
+                <label>Telefone <span class="req">*</span></label>
+                <input class="form-input-c" type="tel" id="cPhone" placeholder="(98) 9XXXX-XXXX" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group-c">
+                <label>E-mail</label>
+                <input class="form-input-c" type="email" id="cEmail" placeholder="seu@email.com">
+              </div>
+              <div class="form-group-c">
+                <label>Assunto</label>
+                <select class="form-input-c" id="cAssunto">
+                  <option>Comprar imóvel</option>
+                  <option>Alugar imóvel</option>
+                  <option>Cadastrar meu imóvel</option>
+                  <option>Lançamentos</option>
+                  <option>Trabalhar conosco</option>
+                  <option>Outros</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row-full">
+              <div class="form-group-c">
+                <label>Mensagem</label>
+                <textarea class="form-input-c" id="cMsg" placeholder="Como podemos te ajudar?"></textarea>
+              </div>
+            </div>
+            <label class="lead-modal-consent" style="margin-bottom:18px;">
+              <input type="checkbox" id="cConsent" checked>
+              <span>Concordo com a Política de Privacidade da MR e autorizo o contato para fins comerciais.</span>
+            </label>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:14px;">Enviar mensagem →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <h2>Nossa equipe</h2>
+      <p class="sub-team">Profissionais experientes prontos para te atender</p>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">CR</div>
+          <div class="team-name">Caio Regadas</div>
+          <div class="team-role">Diretor</div>
+          <div class="team-creci">CRECI J244</div>
+          <a class="team-whatsapp" href="https://wa.me/5598981160785" target="_blank" rel="noopener">📱 Falar</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">MR</div>
+          <div class="team-name">Marcos Regadas</div>
+          <div class="team-role">Fundador</div>
+          <div class="team-creci">Grupo Franere</div>
+          <a class="team-whatsapp" href="https://wa.me/5598981160785" target="_blank" rel="noopener">📱 Falar</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">AS</div>
+          <div class="team-name">Ana Silva</div>
+          <div class="team-role">Corretora Sênior</div>
+          <div class="team-creci">CRECI 12345-MA</div>
+          <a class="team-whatsapp" href="https://wa.me/5598981160785" target="_blank" rel="noopener">📱 Falar</a>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">LP</div>
+          <div class="team-name">Lucas Pereira</div>
+          <div class="team-role">Corretor de Lançamentos</div>
+          <div class="team-creci">CRECI 23456-MA</div>
+          <a class="team-whatsapp" href="https://wa.me/5598981160785" target="_blank" rel="noopener">📱 Falar</a>
+        </div>
+      </div>
+      <p style="text-align:center; color:var(--gray-500); font-size:12px; margin-top:24px;">Fotos e CRECIs ilustrativos — serão atualizados com os dados reais da equipe</p>
+    </div>
+  </section>
+
+  <section class="map-section">
+    <div class="container">
+      <h2>Como chegar</h2>
+      <p>Visite-nos na sede da MR Imobiliária em São Luís</p>
+      <div class="map-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><strong>Sede MR Imobiliária</strong></div>
+        <div style="font-size:12px;">Mapa interativo será carregado aqui · São Luís/MA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+          <p>Há quase 20 anos cuidando do patrimônio de São Luís com relacionamento, confiança e transparência.</p>
+          <div class="footer-franere">⬡ Empresa do grupo Franere</div>
+        </div>
+        <div class="footer-col">
+          <h4>Imóveis</h4>
+          <ul>
+            <li><a href="comprar.html">Comprar</a></li>
+            <li><a href="alugar.html">Alugar</a></li>
+            <li><a href="lancamentos.html">Lançamentos</a></li>
+            <li><a href="administracao.html">Administração</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="index.html#sobre">Sobre a MR</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="equipe.html">Área da Equipe</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="tel:+559831312800">(98) 3131-2800</a></li>
+            <li><a href="https://wa.me/5598981160785" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 <strong>MR Imobiliária</strong> · CRECI J244</div>
+        <div>Política de Privacidade · LGPD · Termos de Uso</div>
+      </div>
+      <div class="footer-credit">
+        <a href="https://www.instagram.com/target_midia" target="_blank" rel="noopener noreferrer"><img src="powered-by-target.png" alt="Site desenvolvido por Target"></a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.297-.496.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+
+  <div class="site-toast" id="siteToast"></div>
+
+  <script src="shared.js"></script>
+  <script>
+    function submitContato(e) {
+      e.preventDefault();
+      const nome = document.getElementById('cNome').value.trim();
+      const phone = document.getElementById('cPhone').value.trim();
+      const email = document.getElementById('cEmail').value.trim();
+      const assunto = document.getElementById('cAssunto').value;
+      const msg = document.getElementById('cMsg').value.trim();
+      const consent = document.getElementById('cConsent').checked;
+
+      if (!nome || !phone) { alert('Preencha nome e telefone.'); return false; }
+      if (!consent) { alert('Você precisa concordar com a Política de Privacidade.'); return false; }
+
+      const lead = {
+        id: Date.now(),
+        nome: nome,
+        contato: phone,
+        email: email || '—',
+        imovel: 'Contato geral · ' + assunto,
+        origem: 'Site (Página Contato)',
+        recebido: 'agora mesmo',
+        recebidoEm: new Date().toISOString(),
+        status: 'new',
+        mensagem: msg || '(sem mensagem)',
+        lido: false
+      };
+      const leads = JSON.parse(localStorage.getItem('mr_leads') || '[]');
+      leads.unshift(lead);
+      localStorage.setItem('mr_leads', JSON.stringify(leads));
+      window.dispatchEvent(new CustomEvent('mr-new-lead', { detail: lead }));
+
+      // Mostra toast e limpa form
+      const toast = document.getElementById('siteToast');
+      toast.textContent = '✓ Mensagem enviada! Vamos retornar em breve.';
+      toast.classList.add('show', 'success');
+      setTimeout(() => toast.classList.remove('show'), 4000);
+
+      document.getElementById('contatoForm').reset();
+      document.getElementById('cConsent').checked = true;
+      return false;
+    }
+  </script>
+</body>
+</html>

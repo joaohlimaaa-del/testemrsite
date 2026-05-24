@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E1251B">
+  <title>Lançamentos exclusivos em São Luís | MR Imobiliária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .launches-hero {
+      position: relative;
+      min-height: 380px;
+      background-image: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(26,26,26,0.6)), url('https://picsum.photos/seed/launchhero/1920/600');
+      background-size: cover;
+      background-position: center;
+      display: flex; align-items: center;
+      color: white;
+    }
+    .launches-hero .container { padding: 60px 24px; }
+    .launches-hero .breadcrumb a, .launches-hero .breadcrumb span { color: rgba(255,255,255,0.8); }
+    .launches-hero h1 {
+      font-size: 52px; font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.05; max-width: 720px;
+      margin: 18px 0 14px;
+    }
+    .launches-hero p { font-size: 18px; max-width: 600px; color: rgba(255,255,255,0.9); }
+
+    .launches-page { padding: 56px 0 80px; }
+    .launch-card {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 36px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
+      transition: all .3s;
+    }
+    .launch-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .launch-card-img {
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+    .launch-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .launch-tag {
+      position: absolute; top: 18px; left: 18px;
+      padding: 7px 14px; background: var(--mr-red);
+      color: white;
+      border-radius: 100px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .launch-card-body {
+      padding: 32px;
+      display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .launch-card-loc {
+      font-size: 12px; font-weight: 700;
+      color: var(--mr-red);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .launch-card-title {
+      font-size: 26px; font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .launch-card-construtora {
+      font-size: 13px; color: var(--gray-600);
+      margin-bottom: 16px;
+    }
+    .launch-card-desc {
+      font-size: 14px; color: var(--gray-700);
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+    .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .launch-stat {
+      padding: 12px 14px;
+      background: var(--gray-50);
+      border-left: 3px solid var(--mr-red);
+      border-radius: 0 6px 6px 0;
+    }
+    .launch-stat strong { display: block; font-size: 11px; color: var(--gray-600); margin-bottom: 2px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .launch-stat span { font-size: 15px; font-weight: 700; color: var(--gray-950); }
+
+    @media (max-width: 768px) {
+      .launches-hero { min-height: 280px; }
+      .launches-hero .container { padding: 40px 18px; }
+      .launches-hero h1 { font-size: 32px; }
+      .launches-hero p { font-size: 15px; }
+      .launch-card { grid-template-columns: 1fr; }
+      .launch-card-body { padding: 22px; }
+      .launch-card-title { font-size: 20px; }
+      .launch-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .launch-stat { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">🎨 <strong>PRÉVIA DE DESIGN</strong> · Versão preliminar</div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+      <nav id="primary-nav">
+        <ul>
+          <li><a href="comprar.html">Comprar</a></li>
+          <li><a href="alugar.html">Alugar</a></li>
+          <li><a href="lancamentos.html" class="nav-active">Lançamentos</a></li>
+          <li><a href="administracao.html">Administração</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li class="mobile-only"><a href="equipe.html">🔒 Área da Equipe</a></li>
+          <li class="mobile-cta"><a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="equipe.html" class="btn btn-ghost btn-team">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Área da Equipe</span>
+        </a>
+        <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Fale Conosco</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <section class="launches-hero">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span>›</span>
+        <span>Lançamentos</span>
+      </nav>
+      <h1>Lançamentos exclusivos em São Luís</h1>
+      <p>Empreendimentos selecionados pelas melhores construtoras, com curadoria da MR Imobiliária.</p>
+    </div>
+  </section>
+
+  <section class="launches-page">
+    <div class="container">
+
+      <article class="launch-card">
+        <div class="launch-card-img">
+          <img src="https://picsum.photos/seed/launch1/800/600" alt="">
+          <span class="launch-tag">Lançamento</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-card-loc">Península · São Luís</div>
+          <h2 class="launch-card-title">Vista Península Residencial</h2>
+          <div class="launch-card-construtora">Construtora XYZ · 30 anos de mercado</div>
+          <p class="launch-card-desc">Empreendimento exclusivo na Península com vista panorâmica para a Lagoa da Jansen. Apartamentos de 2 a 4 quartos com infraestrutura completa de lazer.</p>
+          <div class="launch-grid">
+            <div class="launch-stat"><strong>A partir de</strong><span>R$ 980.000</span></div>
+            <div class="launch-stat"><strong>Metragem</strong><span>78 a 165m²</span></div>
+            <div class="launch-stat"><strong>Quartos</strong><span>2, 3 e 4</span></div>
+            <div class="launch-stat"><strong>Entrega</strong><span>Set/2027</span></div>
+          </div>
+          <button class="btn btn-primary" onclick="openLeadModal({context:'lancamento', ref:{nome:'Vista Península Residencial'}})">Solicitar tabela e condições →</button>
+        </div>
+      </article>
+
+      <article class="launch-card">
+        <div class="launch-card-img">
+          <img src="https://picsum.photos/seed/launch2/800/600" alt="">
+          <span class="launch-tag">Em obras</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-card-loc">Calhau · São Luís</div>
+          <h2 class="launch-card-title">Edifício Mirante do Calhau</h2>
+          <div class="launch-card-construtora">Construtora Franere · Grupo Franere</div>
+          <p class="launch-card-desc">Apartamentos de alto padrão no coração do Calhau, com varanda gourmet, sistema solar e área de lazer completa. Última torre disponível.</p>
+          <div class="launch-grid">
+            <div class="launch-stat"><strong>A partir de</strong><span>R$ 1.250.000</span></div>
+            <div class="launch-stat"><strong>Metragem</strong><span>110 a 180m²</span></div>
+            <div class="launch-stat"><strong>Quartos</strong><span>3 suítes</span></div>
+            <div class="launch-stat"><strong>Entrega</strong><span>Dez/2026</span></div>
+          </div>
+          <button class="btn btn-primary" onclick="openLeadModal({context:'lancamento', ref:{nome:'Edifício Mirante do Calhau'}})">Solicitar tabela e condições →</button>
+        </div>
+      </article>
+
+      <article class="launch-card">
+        <div class="launch-card-img">
+          <img src="https://picsum.photos/seed/launch3/800/600" alt="">
+          <span class="launch-tag">Pré-lançamento</span>
+        </div>
+        <div class="launch-card-body">
+          <div class="launch-card-loc">Renascença II · São Luís</div>
+          <h2 class="launch-card-title">Park Tower Renascença</h2>
+          <div class="launch-card-construtora">Construtora ABC · 15 anos de mercado</div>
+          <p class="launch-card-desc">Torre única com apartamentos de luxo de 200 a 350m². Áreas comuns por arquiteto premiado, vista para a Lagoa da Jansen.</p>
+          <div class="launch-grid">
+            <div class="launch-stat"><strong>A partir de</strong><span>R$ 2.490.000</span></div>
+            <div class="launch-stat"><strong>Metragem</strong><span>200 a 350m²</span></div>
+            <div class="launch-stat"><strong>Quartos</strong><span>4 suítes</span></div>
+            <div class="launch-stat"><strong>Entrega</strong><span>Out/2028</span></div>
+          </div>
+          <button class="btn btn-primary" onclick="openLeadModal({context:'lancamento', ref:{nome:'Park Tower Renascença'}})">Solicitar tabela e condições →</button>
+        </div>
+      </article>
+
+      <div style="background: var(--gray-50); border-radius: var(--radius-lg); padding: 48px 32px; text-align: center; margin-top: 40px;">
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px;">Receba em primeira mão</h2>
+        <p style="font-size: 15px; color: var(--gray-600); margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto;">Seja avisado dos próximos lançamentos da MR antes do mercado geral.</p>
+        <button class="btn btn-primary" onclick="openLeadModal({context:'lancamento', ref:{nome:'Lista VIP de lançamentos'}})">Quero ser avisado →</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+          <p>Há quase 20 anos cuidando do patrimônio de São Luís com relacionamento, confiança e transparência.</p>
+          <div class="footer-franere">⬡ Empresa do grupo Franere</div>
+        </div>
+        <div class="footer-col">
+          <h4>Imóveis</h4>
+          <ul>
+            <li><a href="comprar.html">Comprar</a></li>
+            <li><a href="alugar.html">Alugar</a></li>
+            <li><a href="lancamentos.html">Lançamentos</a></li>
+            <li><a href="administracao.html">Administração</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="index.html#sobre">Sobre a MR</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="equipe.html">Área da Equipe</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="tel:+559831312800">(98) 3131-2800</a></li>
+            <li><a href="https://wa.me/5598981160785" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 <strong>MR Imobiliária</strong> · CRECI J244</div>
+        <div>Política de Privacidade · LGPD · Termos de Uso</div>
+      </div>
+      <div class="footer-credit">
+        <a href="https://www.instagram.com/target_midia" target="_blank" rel="noopener noreferrer"><img src="powered-by-target.png" alt="Site desenvolvido por Target"></a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.297-.496.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+
+  <script src="shared.js"></script>
+</body>
+</html>

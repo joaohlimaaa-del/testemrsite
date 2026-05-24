@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E1251B">
+  <meta name="description" content="Imóveis à venda em São Luís - MR Imobiliária. Apartamentos, casas e coberturas nos melhores bairros: Calhau, Renascença, Ponta D'Areia, Olho D'Água.">
+  <title id="pageTitle">Imóveis à venda em São Luís | MR Imobiliária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+  <div class="preview-banner">
+    🎨 <strong>PRÉVIA DE DESIGN</strong> · Versão preliminar · Fotos e textos finais serão substituídos
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo" aria-label="MR Imobiliária · CRECI J244">
+        <img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img">
+      </a>
+      <nav id="primary-nav" aria-label="Navegação principal">
+        <ul>
+          <li><a href="comprar.html" class="nav-active">Comprar</a></li>
+          <li><a href="alugar.html">Alugar</a></li>
+          <li><a href="lancamentos.html">Lançamentos</a></li>
+          <li><a href="administracao.html">Administração</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li class="mobile-only"><a href="equipe.html">🔒 Área da Equipe</a></li>
+          <li class="mobile-cta"><a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="equipe.html" class="btn btn-ghost btn-team">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Área da Equipe</span>
+        </a>
+        <a href="https://wa.me/5598981160785?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20um%20im%C3%B3vel." target="_blank" rel="noopener noreferrer" class="btn btn-primary">Fale Conosco</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <!-- Page Hero compacto -->
+  <section class="listing-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Navegação estrutural">
+        <a href="index.html">Início</a>
+        <span>›</span>
+        <span id="bcCategoria">Comprar</span>
+      </nav>
+      <h1 class="listing-title" id="listingTitle">Imóveis à venda em São Luís</h1>
+      <p class="listing-subtitle" id="listingCount">Carregando imóveis...</p>
+    </div>
+  </section>
+
+  <section class="listing-page">
+    <div class="container">
+
+      <!-- Filtros topo (mobile + desktop) -->
+      <div class="listing-toolbar">
+        <button class="filter-toggle" id="filterToggle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          Filtros
+          <span class="filter-count" id="filterCount" hidden>0</span>
+        </button>
+        <div class="sort-wrap">
+          <label for="sortBy">Ordenar:</label>
+          <select id="sortBy">
+            <option value="relevance">Mais relevantes</option>
+            <option value="recent">Mais recentes</option>
+            <option value="price-asc">Menor preço</option>
+            <option value="price-desc">Maior preço</option>
+            <option value="area-desc">Maior área</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="listing-layout">
+
+        <!-- Sidebar de filtros -->
+        <aside class="listing-filters" id="filterSidebar">
+          <div class="filter-head">
+            <h3>Filtros</h3>
+            <button class="filter-clear" onclick="clearFilters()">Limpar</button>
+            <button class="filter-close" onclick="toggleFilters()" aria-label="Fechar filtros">✕</button>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Tipo de imóvel</label>
+            <div class="chip-group" data-filter-name="tipo">
+              <button class="chip" data-val="">Todos</button>
+              <button class="chip" data-val="Apartamento">Apartamento</button>
+              <button class="chip" data-val="Casa">Casa</button>
+              <button class="chip" data-val="Cobertura">Cobertura</button>
+              <button class="chip" data-val="Comercial">Comercial</button>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label" for="filterBairro">Bairro</label>
+            <select class="filter-input" id="filterBairro">
+              <option value="">Todos os bairros</option>
+              <option>Calhau</option>
+              <option>Renascença</option>
+              <option>Ponta D'Areia</option>
+              <option>Olho D'Água</option>
+              <option>Península</option>
+              <option>Cohama</option>
+              <option>Cohatrac</option>
+              <option>São Francisco</option>
+              <option>Centro</option>
+            </select>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Faixa de preço</label>
+            <div class="range-wrap">
+              <input class="filter-input" type="text" id="filterMinPrice" placeholder="Mín R$" inputmode="numeric">
+              <span>—</span>
+              <input class="filter-input" type="text" id="filterMaxPrice" placeholder="Máx R$" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Quartos</label>
+            <div class="chip-group" data-filter-name="quartos">
+              <button class="chip" data-val="">Indif.</button>
+              <button class="chip" data-val="1">1</button>
+              <button class="chip" data-val="2">2</button>
+              <button class="chip" data-val="3">3</button>
+              <button class="chip" data-val="4">4+</button>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Vagas</label>
+            <div class="chip-group" data-filter-name="vagas">
+              <button class="chip" data-val="">Indif.</button>
+              <button class="chip" data-val="1">1</button>
+              <button class="chip" data-val="2">2</button>
+              <button class="chip" data-val="3">3</button>
+              <button class="chip" data-val="4">4+</button>
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Área (m²)</label>
+            <div class="range-wrap">
+              <input class="filter-input" type="number" id="filterMinArea" placeholder="Mín" min="0">
+              <span>—</span>
+              <input class="filter-input" type="number" id="filterMaxArea" placeholder="Máx" min="0">
+            </div>
+          </div>
+
+          <div class="filter-block">
+            <label class="filter-label">Status</label>
+            <label class="check-line"><input type="checkbox" id="filterFGTS"> Aceita FGTS</label>
+            <label class="check-line"><input type="checkbox" id="filterFinanc"> Aceita financiamento</label>
+            <label class="check-line"><input type="checkbox" id="filterMobiliado"> Mobiliado</label>
+            <label class="check-line"><input type="checkbox" id="filterPet"> Aceita pet</label>
+          </div>
+
+          <button class="btn btn-primary filter-apply" onclick="applyFilters()">Aplicar filtros</button>
+        </aside>
+
+        <!-- Lista de imóveis -->
+        <div class="listing-main">
+          <div id="imoveisList"></div>
+          <div id="pagination" class="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img">
+          </a>
+          <p>Há quase 20 anos cuidando do patrimônio de São Luís com relacionamento, confiança e transparência.</p>
+          <div class="footer-franere">⬡ Empresa do grupo Franere</div>
+        </div>
+        <div class="footer-col">
+          <h4>Imóveis</h4>
+          <ul>
+            <li><a href="comprar.html">Comprar</a></li>
+            <li><a href="alugar.html">Alugar</a></li>
+            <li><a href="lancamentos.html">Lançamentos</a></li>
+            <li><a href="administracao.html">Administração</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="index.html#sobre">Sobre a MR</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="equipe.html">Área da Equipe</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="tel:+559831312800">(98) 3131-2800</a></li>
+            <li><a href="https://wa.me/5598981160785" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 <strong>MR Imobiliária</strong> · CRECI J244 · Todos os direitos reservados</div>
+        <div>Política de Privacidade · LGPD · Termos de Uso</div>
+      </div>
+      <div class="footer-credit">
+        <a href="https://www.instagram.com/target_midia" target="_blank" rel="noopener noreferrer" aria-label="Site desenvolvido por Target. Siga @target_midia no Instagram">
+          <img src="powered-by-target.png" alt="Site desenvolvido por Target">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5598981160785?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20um%20im%C3%B3vel." target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Falar com a MR no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.297-.496.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+
+  <script src="shared.js"></script>
+  <script src="listing.js"></script>
+</body>
+</html>

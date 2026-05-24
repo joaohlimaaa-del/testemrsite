@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#E1251B">
+  <title>Ficha do imóvel | MR Imobiliária</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .imovel-page { padding: 28px 0 80px; }
+    .imovel-gallery {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+      height: 480px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .imovel-gallery .img-main {
+      grid-row: 1 / 3;
+      cursor: pointer;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+    .imovel-gallery .img-side {
+      cursor: pointer;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+    .imovel-gallery img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .4s;
+    }
+    .imovel-gallery > div:hover img { transform: scale(1.04); }
+    .gallery-btn {
+      position: absolute; bottom: 16px; right: 16px;
+      background: white;
+      color: var(--gray-950);
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-size: 13px; font-weight: 600;
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+    }
+    .imovel-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 32px;
+      align-items: flex-start;
+    }
+    .imovel-content { min-width: 0; }
+    .imovel-head {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 16px; margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .imovel-loc-tag {
+      font-size: 12px; font-weight: 700;
+      color: var(--mr-red);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .imovel-h1 {
+      font-size: 30px; font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .imovel-cod { font-size: 13px; color: var(--gray-500); }
+    .imovel-actions-top { display: flex; gap: 8px; flex-shrink: 0; }
+    .icon-btn-sm {
+      width: 38px; height: 38px;
+      border-radius: 100px;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .15s;
+      font-size: 17px;
+      border: none;
+    }
+    .icon-btn-sm:hover { background: var(--gray-200); color: var(--mr-red); }
+
+    .imovel-features-bar {
+      display: flex;
+      gap: 22px;
+      padding: 20px 24px;
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      margin: 22px 0 28px;
+      flex-wrap: wrap;
+    }
+    .imovel-feature-item {
+      display: flex; flex-direction: column;
+      gap: 2px;
+    }
+    .imovel-feature-item strong {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-950);
+    }
+    .imovel-feature-item span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-600);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .imovel-section { margin-bottom: 36px; }
+    .imovel-section h2 {
+      font-size: 20px; font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .imovel-section p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray-800);
+      margin-bottom: 14px;
+    }
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .amenity-pill {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--gray-800);
+    }
+    .amenity-pill::before {
+      content: '✓';
+      color: var(--mr-red);
+      font-weight: 700;
+    }
+    .map-placeholder {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gray-500);
+      font-size: 14px;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .map-placeholder svg { width: 40px; height: 40px; }
+
+    .imovel-sidebar {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      position: sticky;
+      top: 90px;
+      box-shadow: var(--shadow-sm);
+    }
+    .price-label {
+      font-size: 11px; font-weight: 700;
+      color: var(--gray-600);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .price-value {
+      font-size: 32px; font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--gray-950);
+      line-height: 1.1;
+    }
+    .price-value small {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gray-600);
+    }
+    .price-extras {
+      padding: 14px 0;
+      margin: 16px 0;
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      display: flex; flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .price-extras strong { color: var(--gray-950); font-weight: 600; }
+    .sidebar-cta {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 10px;
+      justify-content: center;
+    }
+    .sidebar-corretor {
+      margin-top: 18px;
+      padding: 14px;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .corretor-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mr-red), #b81b13);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .corretor-info { flex: 1; min-width: 0; }
+    .corretor-name { font-size: 13px; font-weight: 700; color: var(--gray-950); }
+    .corretor-role { font-size: 11px; color: var(--gray-600); }
+
+    .related-section { margin-top: 60px; }
+    .related-section h2 {
+      font-size: 24px; font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    /* Modal galeria fullscreen */
+    .gallery-modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 250;
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 0;
+    }
+    .gallery-modal.show { display: flex; }
+    .gallery-modal img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+    }
+    .gallery-modal .close-gal {
+      position: absolute; top: 20px; right: 20px;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 22px;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-modal .nav-gal {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 24px;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-modal .nav-prev { left: 24px; }
+    .gallery-modal .nav-next { right: 24px; }
+    .gallery-modal .counter {
+      position: absolute; bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1024px) {
+      .imovel-layout { grid-template-columns: 1fr; }
+      .imovel-sidebar { position: static; }
+      .imovel-gallery { height: 360px; }
+    }
+    @media (max-width: 768px) {
+      .imovel-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 100px;
+        height: auto;
+      }
+      .imovel-gallery .img-main {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+      }
+      .imovel-h1 { font-size: 22px; }
+      .imovel-features-bar { gap: 16px; padding: 16px; }
+      .imovel-feature-item strong { font-size: 16px; }
+      .imovel-section h2 { font-size: 18px; }
+      .imovel-section p { font-size: 14px; }
+      .amenities-grid { grid-template-columns: 1fr; }
+      .imovel-sidebar { padding: 20px; }
+      .price-value { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="preview-banner">
+    🎨 <strong>PRÉVIA DE DESIGN</strong> · Versão preliminar
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+      <nav id="primary-nav">
+        <ul>
+          <li><a href="comprar.html">Comprar</a></li>
+          <li><a href="alugar.html">Alugar</a></li>
+          <li><a href="lancamentos.html">Lançamentos</a></li>
+          <li><a href="administracao.html">Administração</a></li>
+          <li><a href="index.html#sobre">Sobre</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li class="mobile-only"><a href="equipe.html">🔒 Área da Equipe</a></li>
+          <li class="mobile-cta"><a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer">Fale Conosco</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="equipe.html" class="btn btn-ghost btn-team">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Área da Equipe</span>
+        </a>
+        <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Fale Conosco</a>
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-overlay" aria-hidden="true"></div>
+
+  <section class="listing-hero" style="padding: 20px 0;">
+    <div class="container">
+      <nav class="breadcrumb" id="bcNav">
+        <a href="index.html">Início</a>
+        <span>›</span>
+        <a href="comprar.html" id="bcCat">Comprar</a>
+        <span>›</span>
+        <span id="bcImovel">Imóvel</span>
+      </nav>
+    </div>
+  </section>
+
+  <section class="imovel-page">
+    <div class="container" id="imovelContainer">
+      <div style="text-align:center;padding:80px;color:var(--gray-500);">Carregando imóvel...</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="logo.png" alt="MR Imobiliária · CRECI J244" class="logo-img"></a>
+          <p>Há quase 20 anos cuidando do patrimônio de São Luís com relacionamento, confiança e transparência.</p>
+          <div class="footer-franere">⬡ Empresa do grupo Franere</div>
+        </div>
+        <div class="footer-col">
+          <h4>Imóveis</h4>
+          <ul>
+            <li><a href="comprar.html">Comprar</a></li>
+            <li><a href="alugar.html">Alugar</a></li>
+            <li><a href="lancamentos.html">Lançamentos</a></li>
+            <li><a href="administracao.html">Administração</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Empresa</h4>
+          <ul>
+            <li><a href="index.html#sobre">Sobre a MR</a></li>
+            <li><a href="contato.html">Contato</a></li>
+            <li><a href="equipe.html">Área da Equipe</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="tel:+559831312800">(98) 3131-2800</a></li>
+            <li><a href="https://wa.me/5598981160785" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 <strong>MR Imobiliária</strong> · CRECI J244</div>
+        <div>Política de Privacidade · LGPD · Termos de Uso</div>
+      </div>
+      <div class="footer-credit">
+        <a href="https://www.instagram.com/target_midia" target="_blank" rel="noopener noreferrer"><img src="powered-by-target.png" alt="Site desenvolvido por Target"></a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5598981160785" target="_blank" rel="noopener noreferrer" class="whatsapp-float">
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.297-.496.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+  </a>
+
+  <div class="gallery-modal" id="galleryModal">
+    <button class="close-gal" onclick="closeGallery()">✕</button>
+    <button class="nav-gal nav-prev" onclick="navGallery(-1)">‹</button>
+    <img id="galleryImg" src="" alt="">
+    <button class="nav-gal nav-next" onclick="navGallery(1)">›</button>
+    <div class="counter" id="galleryCounter">1 / 1</div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const imovelId = params.get('id');
+    const imovel = imovelId ? getImovelById(imovelId) : null;
+    const container = document.getElementById('imovelContainer');
+
+    if (!imovel) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">🏠</div>
+          <h3>Imóvel não encontrado</h3>
+          <p>O imóvel que você está procurando não está mais disponível ou o link está incorreto.</p>
+          <a class="btn btn-primary" href="comprar.html">Ver todos os imóveis</a>
+        </div>
+      `;
+    } else {
+      const isAluguel = imovel.finalidade === 'Locação';
+      const isVenda = imovel.finalidade === 'Venda' || imovel.finalidade === 'Venda + Locação' || imovel.finalidade === 'Ambos';
+
+      document.title = `${imovel.codigo} · ${imovel.titulo} | MR Imobiliária`;
+      document.getElementById('bcCat').textContent = isAluguel ? 'Alugar' : 'Comprar';
+      document.getElementById('bcCat').href = isAluguel ? 'alugar.html' : 'comprar.html';
+      document.getElementById('bcImovel').textContent = imovel.bairro + ' · ' + imovel.codigo;
+
+      const photos = imovel.photos && imovel.photos.length > 0 ? imovel.photos : [imovel.foto];
+      const valorPrincipal = isAluguel
+        ? `R$ ${formatPrice(imovel.valorAluguel) || '—'}<small>/mês</small>`
+        : `R$ ${formatPrice(imovel.valorVenda) || '—'}`;
+
+      container.innerHTML = `
+        <div class="imovel-gallery">
+          <div class="img-main" onclick="openGallery(0)"><img src="${photos[0]}" alt=""></div>
+          ${photos.slice(1, 5).map((p, idx) => `
+            <div class="img-side" onclick="openGallery(${idx + 1})"><img src="${p}" alt=""></div>
+          `).join('')}
+          ${photos.length < 5 ? Array.from({length: 5 - photos.length - (photos.length === 0 ? 0 : 0)}, (_, i) =>
+            `<div class="img-side" style="background:var(--gray-100);display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:14px;">📷</div>`
+          ).join('') : ''}
+          ${photos.length > 1 ? `<button class="gallery-btn" onclick="openGallery(0)">🖼 Ver todas as ${photos.length} fotos</button>` : ''}
+        </div>
+
+        <div class="imovel-layout">
+          <div class="imovel-content">
+            <div class="imovel-head">
+              <div>
+                <div class="imovel-loc-tag">${imovel.bairro} · ${imovel.cidade}</div>
+                <h1 class="imovel-h1">${imovel.titulo}</h1>
+                <div class="imovel-cod">Código: <strong>${imovel.codigo}</strong> · ${imovel.finalidade}</div>
+              </div>
+              <div class="imovel-actions-top">
+                <button class="icon-btn-sm" onclick="this.textContent = this.textContent === '♡' ? '♥' : '♡'; this.style.color = this.textContent === '♥' ? '#E1251B' : ''" title="Favoritar">♡</button>
+                <button class="icon-btn-sm" onclick="shareImovel()" title="Compartilhar">🔗</button>
+              </div>
+            </div>
+
+            <div class="imovel-features-bar">
+              ${imovel.area ? `<div class="imovel-feature-item"><strong>${imovel.area}m²</strong><span>Área útil</span></div>` : ''}
+              ${imovel.quartos ? `<div class="imovel-feature-item"><strong>${imovel.quartos}</strong><span>${imovel.quartos === 1 ? 'Quarto' : 'Quartos'}</span></div>` : ''}
+              ${imovel.suites ? `<div class="imovel-feature-item"><strong>${imovel.suites}</strong><span>${imovel.suites === 1 ? 'Suíte' : 'Suítes'}</span></div>` : ''}
+              ${imovel.banheiros ? `<div class="imovel-feature-item"><strong>${imovel.banheiros}</strong><span>Banheiros</span></div>` : ''}
+              ${imovel.vagas ? `<div class="imovel-feature-item"><strong>${imovel.vagas}</strong><span>${imovel.vagas === 1 ? 'Vaga' : 'Vagas'}</span></div>` : ''}
+              ${imovel.andar ? `<div class="imovel-feature-item"><strong>${imovel.andar}</strong><span>Andar</span></div>` : ''}
+            </div>
+
+            <div class="imovel-section">
+              <h2>Sobre o imóvel</h2>
+              <p>${imovel.descricao || 'Imóvel em ótima localização, ideal para morar ou investir. Entre em contato com um corretor para mais informações e agendamento de visita.'}</p>
+            </div>
+
+            ${imovel.amenities && imovel.amenities.length > 0 ? `
+              <div class="imovel-section">
+                <h2>O que esse imóvel oferece</h2>
+                <div class="amenities-grid">
+                  ${imovel.amenities.map(a => `<div class="amenity-pill">${a}</div>`).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="imovel-section">
+              <h2>Localização</h2>
+              <p><strong>${imovel.rua || ''} ${imovel.numero ? ', ' + imovel.numero : ''}</strong> · ${imovel.bairro}, ${imovel.cidade}</p>
+              <div class="map-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <div>Mapa interativo será carregado aqui</div>
+                <div style="font-size:12px;">Bairro: ${imovel.bairro} · ${imovel.cidade}/MA</div>
+              </div>
+            </div>
+
+            ${imovel.financia && imovel.financia.length > 0 ? `
+              <div class="imovel-section">
+                <h2>Formas de pagamento</h2>
+                <div class="amenities-grid">
+                  ${imovel.financia.map(f => `<div class="amenity-pill">${f}</div>`).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+
+          <aside class="imovel-sidebar">
+            <div class="price-label">${isAluguel ? 'Aluguel' : 'Venda'}</div>
+            <div class="price-value">${valorPrincipal}</div>
+            <div class="price-extras">
+              ${imovel.condominio ? `<div>Condomínio: <strong>R$ ${imovel.condominio}/mês</strong></div>` : ''}
+              ${imovel.iptu ? `<div>IPTU: <strong>R$ ${imovel.iptu}/mês</strong></div>` : ''}
+            </div>
+
+            <button class="btn btn-primary sidebar-cta" onclick="openLeadModal({context: 'imovel', ref: { codigo: '${imovel.codigo}', titulo: \`${imovel.titulo.replace(/`/g, '')}\` }})">
+              💬 Falar com corretor
+            </button>
+            <a class="btn btn-outline sidebar-cta" href="https://wa.me/5598981160785?text=${encodeURIComponent('Olá! Tenho interesse no imóvel ' + imovel.codigo + ' - ' + imovel.titulo)}" target="_blank" rel="noopener" style="border-color:#25D366;color:#25D366;">
+              📱 WhatsApp direto
+            </a>
+            <a class="btn btn-secondary sidebar-cta" href="#" onclick="event.preventDefault(); openLeadModal({context: 'imovel', ref: { codigo: '${imovel.codigo}', titulo: \`${imovel.titulo.replace(/`/g, '')}\` }})">
+              📅 Agendar visita
+            </a>
+
+            <div class="sidebar-corretor">
+              <div class="corretor-avatar">CR</div>
+              <div class="corretor-info">
+                <div class="corretor-name">Caio Regadas</div>
+                <div class="corretor-role">CRECI J244 · Diretor</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      `;
+
+      // Imóveis similares
+      const all = getPublishedImoveis(imovel.finalidade);
+      const related = all.filter(i => i.id !== imovel.id && i.bairro === imovel.bairro).slice(0, 3);
+      const otherRelated = related.length < 3 ? all.filter(i => i.id !== imovel.id && !related.find(r => r.id === i.id)).slice(0, 3 - related.length) : [];
+      const allRelated = [...related, ...otherRelated];
+
+      if (allRelated.length > 0) {
+        const relHTML = `
+          <div class="related-section container">
+            <h2>Imóveis similares ${related.length > 0 ? 'em ' + imovel.bairro : ''}</h2>
+            <div class="imoveis-grid-3">
+              ${allRelated.map(im => `
+                <article class="property-card" onclick="window.location.href='imovel.html?id=${im.id}'">
+                  <div class="property-image">
+                    <img src="${im.foto}" alt="" loading="lazy">
+                  </div>
+                  <div class="property-info">
+                    <div class="property-location">${im.bairro} · ${im.cidade}</div>
+                    <h3 class="property-title">${im.titulo}</h3>
+                    <div class="property-features">
+                      ${im.quartos ? `<span>🛏 ${im.quartos}q</span>` : ''}
+                      ${im.vagas ? `<span>🚗 ${im.vagas}v</span>` : ''}
+                      ${im.area ? `<span>📐 ${im.area}m²</span>` : ''}
+                    </div>
+                    <div class="property-price">
+                      <div class="property-price-value">R$ ${formatPrice(im.valorVenda || im.valorAluguel) || '—'}${im.valorAluguel ? '<small style="font-size:13px;">/mês</small>' : ''}</div>
+                    </div>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        document.querySelector('.imovel-page').insertAdjacentHTML('afterend', relHTML);
+      }
+
+      // Galeria fullscreen
+      let galleryIdx = 0;
+      window.openGallery = function(idx) {
+        galleryIdx = idx;
+        showGalleryImage();
+        document.getElementById('galleryModal').classList.add('show');
+        document.body.classList.add('menu-open');
+      };
+      window.closeGallery = function() {
+        document.getElementById('galleryModal').classList.remove('show');
+        document.body.classList.remove('menu-open');
+      };
+      window.navGallery = function(d) {
+        galleryIdx = (galleryIdx + d + photos.length) % photos.length;
+        showGalleryImage();
+      };
+      function showGalleryImage() {
+        document.getElementById('galleryImg').src = photos[galleryIdx];
+        document.getElementById('galleryCounter').textContent = (galleryIdx + 1) + ' / ' + photos.length;
+      }
+      document.getElementById('galleryModal').addEventListener('click', e => {
+        if (e.target.id === 'galleryModal') closeGallery();
+      });
+      document.addEventListener('keydown', e => {
+        const gm = document.getElementById('galleryModal');
+        if (!gm.classList.contains('show')) return;
+        if (e.key === 'Escape') closeGallery();
+        if (e.key === 'ArrowLeft') navGallery(-1);
+        if (e.key === 'ArrowRight') navGallery(1);
+      });
+
+      window.shareImovel = function() {
+        const url = window.location.href;
+        if (navigator.share) {
+          navigator.share({ title: imovel.titulo, text: imovel.codigo + ' · ' + imovel.titulo, url: url });
+        } else {
+          navigator.clipboard.writeText(url);
+          alert('Link copiado para a área de transferência!');
+        }
+      };
+    }
+  </script>
+</body>
+</html>
